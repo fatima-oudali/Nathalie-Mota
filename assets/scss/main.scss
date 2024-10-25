@@ -1,0 +1,12 @@
+// Fichier principal main.scss
+
+@import 'fonts'; // Import des polices
+@import 'typography'; // Import des polices
+@import 'base';  // Import styles de base
+@import 'variables'; // Import des variables
+@import 'mixins'; // Import des mixins
+
+// Import des parties du site
+@import 'header';
+@import 'footer';
+

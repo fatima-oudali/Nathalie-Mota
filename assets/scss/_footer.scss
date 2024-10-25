@@ -1,0 +1,23 @@
+/* Style pour le footer */
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-top: 1px solid #000000;
+}
+
+.footer-menu-class {
+    list-style: none;
+    display: flex;
+    li {
+        padding: 0 40px;
+        a {
+            text-decoration: none;
+            color: #000; 
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+    }
+}

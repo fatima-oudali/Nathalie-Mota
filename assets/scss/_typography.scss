@@ -1,0 +1,26 @@
+//Police par défaut pour le body
+body {
+    font-family: 'Space Mono', serif;
+    font-weight: 400; 
+}
+
+// H1 utilise Space Mono, 700 italic
+h1 {
+    font-family: 'Space Mono', serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+// H2 utilise Space Mono, 400 italic
+h2 {
+    font-family: 'Space Mono', serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+// Paragraphes (p) utilisent Poppins, 300
+p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}

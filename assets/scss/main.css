@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/poppins-light-webfont.woff2") format("woff2"), url("../fonts/poppins-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/spacemono-regular-webfont.woff2") format("woff2"), url("../fonts/spacemono-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/spacemono-italic-webfont.woff2") format("woff2"), url("../fonts/spacemono-italic-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/spacemono-bold-webfont.woff2") format("woff2"), url("../fonts/spacemono-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/spacemono-bolditalic-webfont.woff2") format("woff2"), url("../fonts/spacemono-bolditalic-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+body {
+  font-family: "Space Mono", serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-family: "Space Mono", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+h2 {
+  font-family: "Space Mono", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+}
+
+/* Style pour le header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 140px;
+  box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.031372549);
+}
+
+.main-navigation {
+  list-style: none;
+  display: flex;
+}
+.main-navigation li {
+  margin-left: 35px;
+}
+.main-navigation li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.main-navigation li a:hover {
+  color: rgba(85, 255, 0, 0.831372549); /* Couleur de survol du lien */
+}
+
+/* Style pour le footer */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-top: 1px solid #000000;
+}
+
+.footer-menu-class {
+  list-style: none;
+  display: flex;
+}
+.footer-menu-class li {
+  padding: 0 40px;
+}
+.footer-menu-class li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
+}/*# sourceMappingURL=main.css.map */

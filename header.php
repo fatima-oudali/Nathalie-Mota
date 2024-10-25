@@ -7,13 +7,25 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header>
-    <div class="logo">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Logo de Nathalie Mota">
-        </a>
-    </div>
-    <nav>
-        <?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-    </nav>
+<header class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                <?php 
+                if ( has_custom_logo() ) {
+                    the_custom_logo(); // Affiche le logo personnalisé
+                } else {
+                    echo '<img src="' . get_template_directory_uri() . '/assets/images/Logo.png" alt="Logo de Nathalie Mota">'; // Affiche le logo par défaut
+                }
+                ?>
+            </a>
+        </div>
+
+        <!-- Menu de navigation -->
+        <nav>
+            <?php wp_nav_menu( array( 
+                'theme_location' => 'primary', 
+                'menu_class' => 'main-navigation' 
+            )); ?>
+        </nav>
 </header>
