@@ -7,6 +7,14 @@
 }
 
 @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/poppins-medium-webfont.woff2') format('woff2'),
+         url('../fonts/poppins-medium-webfont.woff') format('woff');
+    font-weight: 500; // Medium
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Space Mono';
     src: url('../fonts/spacemono-regular-webfont.woff2') format('woff2'),
          url('../fonts/spacemono-regular-webfont.woff') format('woff');

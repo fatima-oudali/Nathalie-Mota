@@ -5,6 +5,12 @@
   font-style: normal;
 }
 @font-face {
+  font-family: "Poppins";
+  src: url("../fonts/poppins-medium-webfont.woff2") format("woff2"), url("../fonts/poppins-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
   font-family: "Space Mono";
   src: url("../fonts/spacemono-regular-webfont.woff2") format("woff2"), url("../fonts/spacemono-regular-webfont.woff") format("woff");
   font-weight: 400;
@@ -51,6 +57,12 @@ p {
   font-style: normal;
 }
 
+label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
 body {
   margin: 0;
 }
@@ -61,8 +73,11 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  padding: 0 140px;
+  padding: 0 215px 0 200px;
   box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.031372549);
+}
+header .logo {
+  padding-right: 20px;
 }
 
 .main-navigation {
@@ -104,4 +119,59 @@ footer {
   color: #000;
   font-size: 16px;
   text-transform: uppercase;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: start;
+  overflow-y: auto;
+}
+.modal .modal-content {
+  background-color: #fff;
+  width: 597px;
+  min-height: 769px;
+  border: solid 5px #000;
+  padding: 10px 0;
+  margin-top: 85px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.modal .modal-content form {
+  width: 263px;
+}
+.modal .modal-content form label {
+  color: #313144;
+  font-size: 12px;
+}
+.modal .modal-content form input {
+  border: 1px solid #B8BBC2;
+  border-radius: 8px;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  box-sizing: border-box;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.modal .modal-content form textarea {
+  width: 100%;
+  height: 210px;
+  margin-top: 5px;
+  border: 1px solid #B8BBC2;
+  border-radius: 8px;
+  padding: 0;
+  box-sizing: border-box;
 }/*# sourceMappingURL=main.css.map */
