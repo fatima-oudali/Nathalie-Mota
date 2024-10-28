@@ -34,13 +34,21 @@ document.addEventListener("DOMContentLoaded", function() {
     // Ouvrir la modale
     openModalButton.addEventListener("click", function(e) {
         e.preventDefault(); // Empêche le comportement par défaut du lien
+        modal.classList.remove('hide'); // Supprimez la classe hide si elle existe
         modal.style.display = "flex"; // Montre la modale
+        setTimeout(() => {
+            modal.classList.add("show");
+        },10);
     });
 
     // Fermer la modale en cliquant sur le fond
     modal.addEventListener("click", function(e) {
         if (e.target === modal) { // Vérifie si l'utilisateur a cliqué sur le fond
-            modal.style.display = "none"; // Cache la modale
+            modal.classList.add('hide'); // Ajoutez la classe pour démarrer l'animation de disparition
+            setTimeout(() => {
+                modal.classList.remove('show', 'hide'); 
+                modal.style.display = 'none'; 
+            },300);
         }
     });
 });

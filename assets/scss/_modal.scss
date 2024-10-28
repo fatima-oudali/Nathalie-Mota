@@ -1,23 +1,36 @@
 .modal {
-    //display: none; // Par défaut, masquée
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height:100vh;
-    background-color: rgba(0, 0, 0, 0.85); // Fond semi-transparent pour l'écran
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0); // Fond transparent initial
     z-index: 1000;
     display: none;
     justify-content: center;
-    align-items: start ;
-    overflow-y: auto; // Active le défilement si le contenu dépasse la hauteur de l'écran
+    align-items: start;
+    overflow-y: auto;
+    opacity: 0; // Masquée initialement
+    transition: opacity 1s ease-in-out, background-color 1s ease-out, transform 1s ease-in;
+
+    &.show {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.85); // Fond semi-transparent lors de l'animation
+        transform: scale(1.02); // Légère échelle pour l'effet d'entrée
+    }
+    &.hide {
+        opacity: 0; // Commence à disparaître
+        background-color: rgba(0, 0, 0, 0); // Fond transparent lors de la disparition
+        transform: scale(0.95); // Réduit légèrement pour l'effet de sortie
+        transition: opacity 0.4s ease-out, background-color 0.5s ease-out, transform 1s ease-out; // Ajout de la transition pour la réduction
+    }
+
     .modal-content {
         background-color: #fff;
         width: 597px;
         min-height: 769px;
         border: solid 5px #000;
         padding: 10px 0;
-        //margin-top: 290px;
         margin-top: 85px;
         margin-bottom: 50px;
         display: flex;
@@ -26,30 +39,32 @@
         justify-content: space-between;
         position: relative;
         overflow: hidden;
+
         form {
             width: 263px;
+
             label {
                 color: #313144;
                 font-size: 12px;
             }
-            input {
+
+            input,
+            textarea {
                 border: 1px solid #B8BBC2;
                 border-radius: 8px;
                 width: 100%;
-                height: 40px;
                 padding: 0;
                 box-sizing: border-box;
                 margin-top: 5px;
+            }
+
+            input {
+                height: 40px;
                 margin-bottom: 10px;
             }
+
             textarea {
-                width: 100%;
                 height: 210px;
-                margin-top: 5px;
-                border: 1px solid #B8BBC2;
-                border-radius: 8px;
-                padding: 0;
-                box-sizing: border-box;
             }
         }
     }
