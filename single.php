@@ -1,50 +1,54 @@
 <?php
 /**
- * The template for displaying all single posts
+ * Template pour afficher tous les articles individuels
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
  * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
+ * @subpackage Nathalie_Mota
+ * @since Nathalie Mota 1.0
  */
 
-get_header();
+get_header(); // Inclut le header du site
 
-/* Start the Loop */
+/* Début de la boucle principale */
 while ( have_posts() ) :
-	the_post();
+    the_post(); // Prépare l'article actuel pour l'affichage
 
-	get_template_part( 'template-parts/content/content-single' );
+    // Charge le template pour le contenu de l'article
+    get_template_part( 'template-parts/content/content-single' );
 
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
-	}
+    // Affiche la navigation vers l'article parent si l'article actuel est une pièce jointe
+    if ( is_attachment() ) {
+        the_post_navigation(
+            array(
+                'prev_text' => sprintf(
+                    __( '<span class="meta-nav">Publié dans</span><span class="post-title">%s</span>', 'nathalie_mota' ),
+                    '%title'
+                ),
+            )
+        );
+    }
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
+    // Affiche la section des commentaires si les commentaires sont ouverts ou s'il y a au moins un commentaire
+    if ( comments_open() || get_comments_number() ) {
+        comments_template(); // Charge le template des commentaires
+    }
 
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
+    // Définit les icônes et libellés pour la navigation "article précédent / suivant"
+    $next_icon = is_rtl() ? nathalie_mota_get_icon_svg( 'ui', 'arrow_left' ) : nathalie_mota_get_icon_svg( 'ui', 'arrow_right' );
+    $prev_icon = is_rtl() ? nathalie_mota_get_icon_svg( 'ui', 'arrow_right' ) : nathalie_mota_get_icon_svg( 'ui', 'arrow_left' );
 
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
+    $next_label     = esc_html__( 'Article suivant', 'nathalie_mota' );
+    $previous_label = esc_html__( 'Article précédent', 'nathalie_mota' );
 
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
+    // Affiche la navigation entre les articles
+    the_post_navigation(
+        array(
+            'next_text' => '<p class="meta-nav">' . $next_label . $next_icon . '</p><p class="post-title">%title</p>',
+            'prev_text' => '<p class="meta-nav">' . $prev_icon . $previous_label . '</p><p class="post-title">%title</p>',
+        )
+    );
+endwhile; // Fin de la boucle principale
 
-get_footer();
+get_footer(); // Inclut le footer du site

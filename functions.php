@@ -34,4 +34,8 @@ function nathalie_mota_register_menus() {
 add_action( 'init', 'nathalie_mota_register_menus' );
 
 
+function nathalie_mota_get_icon_svg( $icon, $size = 24 ) {
+    // Remplacez par le SVG de votre choix ou par une logique d'affichage d'icône
+    return '<svg width="' . esc_attr( $size ) . '" height="' . esc_attr( $size ) . '" ...>...</svg>';
+}
 
