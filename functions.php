@@ -7,8 +7,11 @@ function nathalie_mota_enqueue_scripts() {
     // Enqueue CSS depuis le dossier assets/css
     wp_enqueue_style( 'nathalie-mota-style', get_template_directory_uri() . '/assets/scss/main.css' );
 
+    // Enqueue jQuery
+    wp_enqueue_script( 'jquery' ); // S'assurer que jQuery est chargé
+
     // Enqueue JavaScript
-    wp_enqueue_script( 'custom-js', get_template_directory_uri() . '/js/scripts.js', array(), null, true );
+    wp_enqueue_script( 'custom-js', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' ); // Ajout de la fonction à l'action wp_enqueue_scripts
 

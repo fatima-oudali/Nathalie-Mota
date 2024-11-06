@@ -52,3 +52,41 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+jQuery(document).ready(function($) {
+    const modal = $("#modalContact");
+    const openModalButton = $("#contactButton");
+
+    // Ouvrir la modal au clic sur le bouton
+    openModalButton.on("click", function(e) {
+        e.preventDefault(); // Empêche le comportement par défaut du bouton
+        const refPhoto = $(this).data('ref'); // Récupérer la référence de la photo depuis l'attribut data-ref
+        $('#ref-photo').val(refPhoto); // Pré-remplir le champ de référence dans la modal
+        modal.removeClass('hide'); // S'assurer que la modal n'a pas la classe hide
+        modal.css("display", "flex"); // Affiche la modal
+        setTimeout(() => {
+            modal.addClass("show"); // Ajoute la classe show après l'affichage
+        }, 10);
+    });
+
+    // Fermer la modal en cliquant sur le fond
+    modal.on("click", function(e) {
+        if ($(e.target).is(modal)) { // Vérifie si l'utilisateur a cliqué sur le fond
+            modal.addClass('hide'); // Ajoute la classe hide pour démarrer l'animation de disparition
+            setTimeout(() => {
+                modal.removeClass('show hide'); // Retire les classes pour réinitialiser
+                modal.css("display", "none"); // Cache la modal
+                $('#ref-photo').val(''); // Vide le champ de référence
+            }, 300); // Délai pour attendre que l'animation se termine
+        }
+    });
+});
+
+
+
+
+
+
+
+
