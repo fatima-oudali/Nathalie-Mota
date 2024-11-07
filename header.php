@@ -20,6 +20,8 @@
                 ?>
             </a>
         </div>
+    
+        <!-- Bouton hamburger pour menu mobile -->
 
         <!-- Menu de navigation -->
         <nav>
@@ -27,5 +29,10 @@
                 'theme_location' => 'primary', 
                 'menu_class' => 'main-navigation' 
             )); ?>
+            <a class="menu-toggle">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </a>
         </nav>
 </header>

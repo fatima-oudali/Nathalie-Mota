@@ -30,3 +30,116 @@ header {
 .main-navigation li a:hover {
     color: #E00000;
 }
+
+
+/* Styles pour le burger */
+.menu-toggle {
+    cursor: pointer;
+    z-index: 20; 
+    width: 28px;
+    height: 20px;
+    position: relative; /* Conteneur relatif pour permettre aux lignes d'être positionnées à l'intérieur */
+}
+
+.line {
+    width: 100%;
+    height: 1.7px;
+    border-radius: 10px;
+    //margin: 8px 0; /* Espacement vertical entre les lignes */
+    background-color: #000; /* Donne une couleur aux lignes pour les rendre visibles */
+    position: absolute; /* Positionnement absolu pour éviter qu'elles ne s'empilent */
+    left: 0; /* Positionne les lignes à gauche du conteneur */
+    transition: all 0.3s ease;
+}
+
+
+.line:nth-child(1) {
+    top: 0; /* Positionne la première ligne en haut */
+}
+
+.line:nth-child(2) {
+    top: 50%; /* Positionne la deuxième ligne au milieu */
+    transform: translateY(-50%); /* Centre verticalement la deuxième ligne */
+}
+
+.line:nth-child(3) {
+    bottom: 0; /* Positionne la troisième ligne en bas */
+}
+
+/* Animation pour transformer le burger en croix quand .open est appliqué */
+.menu-toggle.open .line:nth-child(1) {
+    transform: rotate(45deg);
+    top: 50%; /* Aligne la première ligne avec le centre */
+}
+
+.menu-toggle.open .line:nth-child(2) {
+    opacity: 0; /* Cache la ligne du milieu */
+}
+
+.menu-toggle.open .line:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 50%; /* Aligne la troisième ligne avec le centre */
+}
+
+
+
+
+// Responsive pour les petits écrans (max-width: 768px)
+@include respond-to($breakpoint-mobile) {
+    header {
+        padding: 0 15px; /* Réduire l'espacement pour les petits écrans */
+    }
+
+/* Affichage du menu mobile quand actif */
+.main-navigation {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 80px;
+    box-shadow: 0px 4px 14px 10px #00000008;
+    left: 100%; /* Positionne le menu en dehors de l'écran */
+    transition: left 300ms ease-out, opacity 300ms ease-out;
+    opacity: 0;
+    visibility: hidden; /* Cache l'overlay */
+}
+
+.main-navigation.active {
+    //position: fixed;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Affiche le menu en colonne */
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100%;
+    background-color: #E00000;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+   
+}
+
+    /* Afficher le bouton hamburger sur mobile */
+    .menu-toggle {
+        display: block;
+    }
+    
+
+    /* Centrer les éléments du menu */
+    .main-navigation li {
+        margin: 0;
+        text-align: center;
+        line-height: 65.16px;
+        a {
+            color: #FFFFFF;
+            font-size: 44px;
+        }
+    }
+
+    /* Affichage du menu lorsqu'il est activé */
+   // .main-navigation.active {
+      //  display: block; /* Afficher le menu */
+   // }
+}

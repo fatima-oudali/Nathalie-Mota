@@ -109,7 +109,56 @@ while ( have_posts() ) :
 
             </div>
         </section>
-    </div>    
+    </div>
+    <!-- Partie 2 : Photos apparentées -->
+    <section class="related-photos">
+        <h3>Vous aimerez AUSSI</h3>
+        <div class="related-images">
+            <?php
+            // Récupérer les catégories de l'article actuel
+            $categories = get_the_terms(get_the_ID(), 'categorie');
+            $category_ids = [];
+
+            if ($categories && !is_wp_error($categories)) {
+                foreach ($categories as $category) {
+                    $category_ids[] = $category->term_id;
+                }
+            }
+
+            // Requête pour les photos apparentées de la même catégorie
+            $related_photos = new WP_Query(array(
+                'post_type' => 'photo',
+                'posts_per_page' => 2, // Nombre de photos à afficher
+                'post__not_in' => array(get_the_ID()), // Exclure l'article actuel
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field' => 'term_id',
+                        'terms' => $category_ids,
+                    ),
+                ),
+                'orderby' => 'rand', // Ajoute un ordre aléatoire pour varier les photos
+            ));
+
+            // Vérifier si des articles sont trouvés et les afficher
+            if ($related_photos->have_posts()) :
+                while ($related_photos->have_posts()) : $related_photos->the_post(); ?>
+                    <div class="related-photo">
+                        <a href="<?php the_permalink(); ?>">
+                            <?php 
+                            if ( has_post_thumbnail() ) {
+                                the_post_thumbnail('large'); 
+                            }
+                            ?>
+                        </a>
+                    </div>
+                <?php endwhile;
+                wp_reset_postdata(); // Réinitialiser les données de la requête
+            else : ?>
+                <p>Aucune photo apparentée trouvée.</p>
+            <?php endif; ?>
+        </div>
+    </section>    
 
 <?php
 endwhile; // Fin de la boucle principale

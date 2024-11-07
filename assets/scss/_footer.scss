@@ -25,3 +25,19 @@ footer {
 #menu-footer-menu li a:hover {
     color: #E00000;
 }
+
+// Responsive pour les petits écrans (max-width: 768px)
+@include respond-to($breakpoint-mobile) {
+    footer {
+        height: 208px;
+    }
+    #menu-footer-menu {
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 0;
+        line-height: 23.7px;
+    }
+}

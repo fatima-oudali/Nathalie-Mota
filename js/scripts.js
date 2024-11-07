@@ -84,6 +84,22 @@ jQuery(document).ready(function($) {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.main-navigation');
+
+    menuToggle.addEventListener('click', function() {
+        setTimeout(() => {
+        menuToggle.classList.toggle('open'); // Transforme le burger en croix
+        navigation.classList.toggle('active'); // Affiche/Cache le menu mobile
+        },10);
+    });
+});
+
+
+  
+
+
 
 
 
