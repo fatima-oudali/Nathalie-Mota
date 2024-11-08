@@ -81,13 +81,21 @@ header {
     top: 50%; /* Aligne la troisième ligne avec le centre */
 }
 
-
+// Responsive pour les tablettes (max-width: 1024px)
+@include respond-to($breakpoint-tablet) {
+    header {
+        padding: 0 80px;
+    }
+}
 
 
 // Responsive pour les petits écrans (max-width: 768px)
 @include respond-to($breakpoint-mobile) {
     header {
-        padding: 0 15px; /* Réduire l'espacement pour les petits écrans */
+        padding: 0 30px 0 40px; 
+        .logo img {
+            width: 138px;
+        }
     }
 
 /* Affichage du menu mobile quand actif */
@@ -137,9 +145,4 @@ header {
             font-size: 44px;
         }
     }
-
-    /* Affichage du menu lorsqu'il est activé */
-   // .main-navigation.active {
-      //  display: block; /* Afficher le menu */
-   // }
 }
