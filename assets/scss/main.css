@@ -258,8 +258,10 @@ footer {
 }
 .modal.show {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
   transform: scale(1.02);
+  align-items: center;
+  justify-content: center;
 }
 .modal.hide {
   opacity: 0;
@@ -269,21 +271,29 @@ footer {
 }
 .modal .modal-content {
   background-color: #fff;
-  width: 597px;
-  min-height: 769px;
+  max-width: 597px;
+  width: 95%;
+  max-height: 95vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: auto;
   border: solid 5px #000;
   padding: 10px 0;
-  margin-top: 85px;
-  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  overflow: hidden;
+}
+.modal .modal-content .wpcf7 form .wpcf7-response-output {
+  margin: 0;
 }
 .modal .modal-content form {
   width: 263px;
+  padding-top: 30px;
+}
+.modal .modal-content form p {
+  margin-bottom: 0;
 }
 .modal .modal-content form label {
   color: #313144;
@@ -304,11 +314,25 @@ footer {
 }
 .modal .modal-content form textarea {
   height: 210px;
+  resize: none;
+}
+.modal .modal-content form input:focus,
+.modal .modal-content form textarea:focus {
+  outline: none;
+}
+.modal .modal-content form #btn-envoyer {
+  width: 263px;
+  height: 50px;
+  border-radius: 2px;
+  background-color: #D8D8D8;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.0196078431);
+  padding: 8px 15px;
 }
 
 .full-height {
   margin: auto;
-  height: 100vh;
   max-width: 1148px;
 }
 
@@ -316,7 +340,6 @@ footer {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  height: calc(100% - 198px);
   padding-top: 30px;
 }
 .article-details .article-info {
@@ -339,7 +362,7 @@ footer {
   line-height: 20.73px;
 }
 .article-details .article-image {
-  height: 100%;
+  height: auto;
   width: 50%;
 }
 .article-details .article-image img {
@@ -369,9 +392,9 @@ footer {
   border-radius: 2px;
   background-color: #D8D8D8;
   border: none;
+  cursor: pointer;
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.0196078431);
   padding: 8px 15px;
-  cursor: pointer;
 }
 
 .photo-navigation {
@@ -471,6 +494,9 @@ footer {
     align-items: center;
     justify-content: center;
     padding-bottom: 20px;
+  }
+  .contact-call #contactButton {
+    width: 263px;
   }
   .related-photos {
     display: flex;

@@ -143,15 +143,7 @@ while ( have_posts() ) :
             // Vérifier si des articles sont trouvés et les afficher
             if ($related_photos->have_posts()) :
                 while ($related_photos->have_posts()) : $related_photos->the_post(); ?>
-                    <div class="related-photo">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php 
-                            if ( has_post_thumbnail() ) {
-                                the_post_thumbnail('large'); 
-                            }
-                            ?>
-                        </a>
-                    </div>
+                 <?php get_template_part('template-parts/photo_block');?>
                 <?php endwhile;
                 wp_reset_postdata(); // Réinitialiser les données de la requête
             else : ?>

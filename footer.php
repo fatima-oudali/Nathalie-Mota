@@ -8,7 +8,7 @@
     ?>
 
     <!-- Inclure la modale de contact -->
-    <?php get_template_part('templates_part/modal', 'contact'); ?>
+    <?php get_template_part('template-parts/modal', 'contact'); ?>
 
     <?php wp_footer(); ?> <!-- Appel à wp_footer pour inclure les scripts et styles nécessaires -->
 

@@ -1,3 +1,21 @@
+// Mixin pour les styles de bouton
+@mixin button-styles {
+    height: 50px;
+    border-radius: 2px;
+    background-color: #D8D8D8;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 2px 1px 0px #00000005;
+    padding: 8px 15px;
+}
+
+// Mixin pour un conteneur flex avec alignement centré et espace distribué
+@mixin flex-centered-space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 // Breakpoints pour mobile et tablette
 $breakpoint-mobile: 768px;
 $breakpoint-tablet: 1024px;
@@ -8,3 +26,4 @@ $breakpoint-tablet: 1024px;
         @content;
     }
 }
+

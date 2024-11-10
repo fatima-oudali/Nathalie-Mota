@@ -1,13 +1,11 @@
 .full-height {
    margin: auto; 
-   height: 100vh;
    max-width: 1148px;   
 }
 .article-details {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    height: calc(100% - 198px);
     padding-top: 30px;
     .article-info {
         height: auto;
@@ -29,7 +27,7 @@
         }
     }
     .article-image {
-       height: 100%;
+       height: auto;
        width: 50%;
     }
     .article-image img {
@@ -46,21 +44,13 @@
     border-bottom: 1px solid #000;
 }
 .contact-call {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-centered-space-between;
     width: 49%;
     border-top: 1px solid #000;
     height: 118px;
     #contactButton {
         width: 272px;
-        height: 50px;
-        border-radius: 2px;
-        background-color: #D8D8D8;
-        border: none;
-        box-shadow: 0px 2px 1px 0px #00000005;
-        padding: 8px 15px;
-        cursor: pointer;
+        @include button-styles;
     }
 }
 .photo-navigation {
@@ -83,9 +73,7 @@
     max-width: 1148px;
     margin: auto;
     .related-images {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-centered-space-between;
         margin-top: 40px;
         margin-bottom: 100px;
         .related-photo {
@@ -162,7 +150,9 @@
         align-items: center;
         justify-content: center;
         padding-bottom: 20px;
-        
+        #contactButton {
+            width: 263px;
+        }
     }
     .related-photos {
         display: flex;
@@ -179,8 +169,6 @@
             align-items: center;
             justify-content: space-between;
             .related-photo {
-               // width: 100%;
-               // height: 100vh;
                 max-width: 318px;
                 max-height: 279px;
                 margin-bottom: 20px;
