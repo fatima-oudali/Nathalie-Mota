@@ -97,6 +97,80 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+/*jQuery(document).ready(function($) {
+    let page = 2; // On commence à partir de la page 2 pour charger plus d'images
+    $('#load-more').click(function() {
+        var data = {
+            'action': 'load_more_photos', // Action pour l'AJAX
+            'page': page, // Page actuelle
+        };
+
+        $.post("<?php echo admin_url('admin-ajax.php'); ?>", data, function(response) {
+            if(response) {
+                $('.related-images').append(response); // Ajouter les nouvelles photos
+                page++; // Incrémenter la page pour la prochaine requête
+            }
+        });
+    });
+});*/
+
+
+/*var current_page = 1;
+jQuery('#load-more-button').on('click', function() {
+    current_page++; // Incrémentation de la page
+    var data = {
+        action: 'load_more_photos',
+        page: current_page
+    };
+
+    console.log('Données envoyées : ', data); // Vérifier les données envoyées
+
+    $.post(ajax_object.ajax_url, data, function(response) {
+        console.log('Réponse reçue : ', response); // Vérifier la réponse du serveur
+        $('.related-images').append(response); // Ajoute les photos retournées
+    });
+});*/
+
+
+
+jQuery(document).ready(function($) {
+    let page = 2; // Commence à 2 car la page 1 est déjà chargée
+
+    $('#load-more-button').on('click', function() {
+        $.ajax({
+            url: wp_data.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'load_more_photos',
+                page: page,
+            },
+            success: function(response) {
+                if(response) {
+                    $('.related-images').append(response); // Ajoute les nouvelles photos
+                    page++; // Passe à la page suivante
+                } else {
+                    $('#load-more-button').hide(); // Cache le bouton si plus de photos
+                }
+            },
+            error: function() {
+                console.log('Erreur de chargement.');
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 

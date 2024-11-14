@@ -42,3 +42,39 @@ function nathalie_mota_get_icon_svg( $icon, $size = 24 ) {
     return '<svg width="' . esc_attr( $size ) . '" height="' . esc_attr( $size ) . '" ...>...</svg>';
 }
 
+
+// Charger le script Ajax et définir l’URL de l’API Ajax de WordPress
+function enqueue_ajax_script() {
+    wp_enqueue_script('load-more', get_template_directory_uri() . '/scripts.js', array('jquery'), null, true);
+    wp_localize_script('load-more', 'wp_data', array(
+        'ajax_url' => admin_url('admin-ajax.php')
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_ajax_script');
+
+
+
+
+function load_more_photos() {
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'paged' => $page,
+    );
+
+    $photo_query = new WP_Query($args);
+
+    if ($photo_query->have_posts()) :
+        while ($photo_query->have_posts()) : $photo_query->the_post();
+            get_template_part('template-parts/photo_block');
+        endwhile;
+    endif;
+
+    wp_die();
+}
+add_action('wp_ajax_load_more_photos', 'load_more_photos');
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
+

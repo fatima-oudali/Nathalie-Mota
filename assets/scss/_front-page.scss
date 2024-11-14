@@ -26,6 +26,16 @@
     width: 1000px;
 }
 
-
+.home-page .related-photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#load-more-button {
+    width: 272px;
+    @include button-styles;
+    margin-bottom: 80px;
+}
 
 
