@@ -36,6 +36,30 @@ get_header();
     <!--<h1>Bienvenue sur notre site</h1>-->
     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/titre-header.png" alt="Titre photographe event">
     </section>
+    <section class="related-photos">
+    <div class="related-images">
+    
+    <?php
+    // Requête pour récupérer toutes les photos du type de contenu personnalisé 'photo'
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+    );
+
+    $photo_query = new WP_Query($args);
+
+    if ($photo_query->have_posts()) :
+        while ($photo_query->have_posts()) : $photo_query->the_post(); ?>
+             <!-- Inclure le template part pour chaque photo -->
+             <?php get_template_part('template-parts/photo_block');?>              
+        <?php endwhile;
+        wp_reset_postdata(); // Réinitialiser les données de la requête
+    else : ?>
+        echo '<p>Aucune photo disponible.</p>';
+    <?php endif; ?>
+    </div>
+</section>
+
 </main>
 
 <?php get_footer(); ?>
