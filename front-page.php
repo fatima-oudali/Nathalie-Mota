@@ -37,10 +37,46 @@ get_header();
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/titre-header.png" alt="Titre photographe event">
     </section>
     <section class="related-photos">
+        <div class="filters">
+            <div>
+                <select id="filter-categorie">
+                    <option value="">Catégories</option>
+                    <?php 
+                    $categories = get_terms(array(
+                        'taxonomy' => 'categorie',
+                        'hide_empty' => true,
+                    ));
+                    foreach ($categories as $category) {
+                        echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
+                    }
+                    ?>
+                </select>
+
+                <select id="filter-format">
+                    <option value="">Formats</option>
+                    <?php 
+                    $formats = get_terms(array(
+                        'taxonomy' => 'format',
+                        'hide_empty' => true,
+                    ));
+                    foreach ($formats as $format) {
+                        echo '<option value="' . esc_attr($format->slug) . '">' . esc_html($format->name) . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <select id="sort-date">
+                <option value="" disabled selected>Trier par</option>
+                <option value="desc">Plus récentes</option>
+                <option value="asc">Plus anciennes</option>
+            </select>
+
+        </div>
         <div class="related-images">
         
             <?php
             // Requête pour récupérer toutes les photos du type de contenu personnalisé 'photo'
+            $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1; // Vérifier si la page actuelle est paginée, sinon la définir à 1
             $args = array(
                 'post_type' => 'photo',
                 'posts_per_page' => 8, // Limiter à 8 photos par page
@@ -60,7 +96,7 @@ get_header();
             <?php endif; ?>                
         </div>
         <div class="load-more">
-            <button id="load-more-button">Charger plus</button>
+            <button id="load-more-button" aria-label="Charger plus de photos">Charger plus</button>
         </div>
 </section>
 

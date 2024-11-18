@@ -45,9 +45,9 @@ function nathalie_mota_get_icon_svg( $icon, $size = 24 ) {
 
 // Charger le script Ajax et définir l’URL de l’API Ajax de WordPress
 function enqueue_ajax_script() {
-    wp_enqueue_script('load-more', get_template_directory_uri() . '/scripts.js', array('jquery'), null, true);
+    wp_enqueue_script('load-more', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true);
     wp_localize_script('load-more', 'wp_data', array(
-        'ajax_url' => admin_url('admin-ajax.php')
+        'ajax_url' => admin_url('admin-ajax.php'),
     ));
 }
 add_action('wp_enqueue_scripts', 'enqueue_ajax_script');
@@ -77,4 +77,108 @@ function load_more_photos() {
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
+function filter_photos() {
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
 
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+    );
+
+    if ($category) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'categorie_taxonomie', // Remplacer par ta taxonomie
+                'field' => 'slug',
+                'terms' => $category,
+            ),
+        );
+    }
+
+    if ($format) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format_taxonomie', // Remplacer par ta taxonomie
+            'field' => 'slug',
+            'terms' => $format,
+        );
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            get_template_part('template-parts/photo_block');
+        endwhile;
+    else :
+        echo '<p>Aucune photo trouvée.</p>';
+    endif;
+
+    wp_die();
+}
+add_action('wp_ajax_filter_photos', 'filter_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+
+
+
+function filter_and_sort_photos() {
+    $category = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
+    $sort = isset($_POST['sort']) ? sanitize_text_field($_POST['sort']) : 'desc';
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'orderby' => 'date',
+        'order' => $sort,
+    );
+
+    if ($category) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => $category,
+        );
+    }
+
+    if ($format) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field' => 'slug',
+            'terms' => $format,
+        );
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            get_template_part('template-parts/photo_block');
+        endwhile;
+    else :
+        echo '<p>Aucune photo trouvée.</p>';
+    endif;
+
+    wp_die();
+}
+add_action('wp_ajax_filter_and_sort_photos', 'filter_and_sort_photos');
+add_action('wp_ajax_nopriv_filter_and_sort_photos', 'filter_and_sort_photos');
+
+function ajouter_termes_par_defaut_si_absents() {
+    // Catégories par défaut
+    $categories = array('Réception', 'Mariage', 'Concert', 'Télévision');
+    foreach ($categories as $categorie) {
+        if (!term_exists($categorie, 'categories')) {
+            wp_insert_term($categorie, 'categories');
+        }
+    }
+
+    // Formats par défaut
+    $formats = array('paysage', 'portrait');
+    foreach ($formats as $format) {
+        if (!term_exists($format, 'formats')) {
+            wp_insert_term($format, 'formats');
+        }
+    }
+}
+add_action('init', 'ajouter_termes_par_defaut_si_absents');

@@ -51,6 +51,7 @@
     #contactButton {
         width: 272px;
         @include button-styles;
+        @include hover-button;
     }
 }
 .photo-navigation {

@@ -83,6 +83,7 @@
             #btn-envoyer {
                 width: 263px ;
                 @include button-styles;
+                @include hover-button;
             }
         }
     }

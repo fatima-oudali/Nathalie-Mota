@@ -1,31 +1,3 @@
-/*document.addEventListener("DOMContentLoaded", function () {
-    // Sélection des éléments de la modale
-    const modal = document.getElementById("modalContact");
-    const contactLink = document.querySelector(".menu-item-55"); // Lien du menu "Contact"
-    
-    // Fonction pour ouvrir la modale
-    function openModal() {
-        modal.style.display = "flex"; // Affiche la modale en mode flex
-    }
-
-    // Fonction pour fermer la modale
-    function closeModal(event) {
-        // Ferme la modale uniquement si on clique en dehors de modal-content
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    // Ouvrir la modale en cliquant sur le lien "Contact"
-    contactLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Empêche le lien de rediriger
-        openModal();
-    });
-
-    // Fermer la modale en cliquant sur le fond semi-transparent
-    modal.addEventListener("click", closeModal);
-});*/
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modalContact");
@@ -97,42 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-/*jQuery(document).ready(function($) {
-    let page = 2; // On commence à partir de la page 2 pour charger plus d'images
-    $('#load-more').click(function() {
-        var data = {
-            'action': 'load_more_photos', // Action pour l'AJAX
-            'page': page, // Page actuelle
-        };
-
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", data, function(response) {
-            if(response) {
-                $('.related-images').append(response); // Ajouter les nouvelles photos
-                page++; // Incrémenter la page pour la prochaine requête
-            }
-        });
-    });
-});*/
-
-
-/*var current_page = 1;
-jQuery('#load-more-button').on('click', function() {
-    current_page++; // Incrémentation de la page
-    var data = {
-        action: 'load_more_photos',
-        page: current_page
-    };
-
-    console.log('Données envoyées : ', data); // Vérifier les données envoyées
-
-    $.post(ajax_object.ajax_url, data, function(response) {
-        console.log('Réponse reçue : ', response); // Vérifier la réponse du serveur
-        $('.related-images').append(response); // Ajoute les photos retournées
-    });
-});*/
-
-
-
 jQuery(document).ready(function($) {
     let page = 2; // Commence à 2 car la page 1 est déjà chargée
 
@@ -158,6 +94,37 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filters = document.querySelectorAll("#filter-categorie, #filter-format, #sort-date");
+    const photoContainer = document.querySelector(".related-images");
+
+    filters.forEach(filter => {
+        filter.addEventListener("change", function () {
+            const category = document.querySelector("#filter-categorie").value;
+            const format = document.querySelector("#filter-format").value;
+            const sort = document.querySelector("#sort-date").value;
+
+            const formData = new FormData();
+            formData.append("action", "filter_and_sort_photos");
+            formData.append("category", category);
+            formData.append("format", format);
+            formData.append("sort", sort);
+
+            fetch(wp_data.ajax_url, {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                photoContainer.innerHTML = data;
+            })
+            .catch(error => console.error("Erreur:", error));
+        });
+    });
+});
+
 
 
 

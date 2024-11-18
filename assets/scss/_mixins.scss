@@ -9,6 +9,14 @@
     padding: 8px 15px;
 }
 
+@mixin hover-button {
+    &:hover {
+      font-weight: 700;
+      color: #FFFFFF;
+      background-color:#000000;
+    }
+  }
+
 // Mixin pour un conteneur flex avec alignement centré et espace distribué
 @mixin flex-centered-space-between {
     display: flex;

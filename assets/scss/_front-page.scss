@@ -32,10 +32,51 @@
     align-items: center;
     justify-content: space-between;
 }
+
+//Bouton 'Charger plus'
 #load-more-button {
     width: 272px;
     @include button-styles;
     margin-bottom: 80px;
+    @include hover-button;
+}
+
+.filters {
+    width: 100%;
+    margin-top: 80px;
+    @include flex-centered-space-between;
+    #filter-categorie,
+    #filter-format,
+    #sort-date {
+        width: 260px;
+        height: 42px;
+        border: 1.3px solid #B8BBC2;
+        border-radius: 8px;
+        padding: 11px 18px;
+    }
+
+}
+
+// Responsive pour les tablettes (max-width: 1024px)
+@include respond-to($breakpoint-tablet) {
+
 }
 
 
+// Responsive pour les petits écrans (max-width: 768px)
+@include respond-to($breakpoint-mobile) { 
+    .filters {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 270px;
+        margin-top: 30px;
+        #filter-categorie,
+        #filter-format,
+        #sort-date {
+            margin-bottom: 10px;
+            width: 270px;
+        }
+    }
+
+}
