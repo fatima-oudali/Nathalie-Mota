@@ -2,7 +2,7 @@
 
 
 // Enqueue des styles et scripts
-function nathalie_mota_enqueue_scripts() {
+/*function nathalie_mota_enqueue_scripts() {
 
     // Enqueue CSS depuis le dossier assets/css
     wp_enqueue_style( 'nathalie-mota-style', get_template_directory_uri() . '/assets/scss/main.css' );
@@ -13,9 +13,26 @@ function nathalie_mota_enqueue_scripts() {
     // Enqueue JavaScript
     wp_enqueue_script( 'custom-js', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true );
 }
-add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' ); // Ajout de la fonction à l'action wp_enqueue_scripts
+add_action( 'wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts' ); // Ajout de la fonction à l'action wp_enqueue_scripts*/
 
 
+
+function nathalie_mota_enqueue_scripts() {
+    // Enqueue CSS depuis le dossier assets/css
+    wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/assets/scss/main.css');
+
+    // Enqueue jQuery
+    wp_enqueue_script('jquery');
+
+    // Enqueue JavaScript (inclut l'URL Ajax)
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true);
+
+    // Localiser le script avec l'URL Ajax
+    wp_localize_script('custom-js', 'wp_data', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'nathalie_mota_enqueue_scripts');
 
 // Fonction pour ajouter le support des logos personnalisés
 function nathalie_mota_setup() {
@@ -41,18 +58,6 @@ function nathalie_mota_get_icon_svg( $icon, $size = 24 ) {
     // Remplacez par le SVG de votre choix ou par une logique d'affichage d'icône
     return '<svg width="' . esc_attr( $size ) . '" height="' . esc_attr( $size ) . '" ...>...</svg>';
 }
-
-
-// Charger le script Ajax et définir l’URL de l’API Ajax de WordPress
-function enqueue_ajax_script() {
-    wp_enqueue_script('load-more', get_template_directory_uri() . '/js/scripts.js', array('jquery'), null, true);
-    wp_localize_script('load-more', 'wp_data', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-    ));
-}
-add_action('wp_enqueue_scripts', 'enqueue_ajax_script');
-
-
 
 
 function load_more_photos() {
@@ -182,3 +187,34 @@ function ajouter_termes_par_defaut_si_absents() {
     }
 }
 add_action('init', 'ajouter_termes_par_defaut_si_absents');
+
+
+add_filter('rest_prepare_attachment', function ($response, $post, $request) {
+    // Ajoute l'ID du post parent au champ `post`
+    $parent_id = $post->post_parent;
+
+    if ($parent_id) {
+        $response->data['post'] = $parent_id;
+    } else {
+        $response->data['post'] = null;
+    }
+
+    return $response;
+}, 10, 3);
+
+
+add_action('save_post', function ($post_id) {
+    // Vérifie si une image mise en avant est définie
+    $thumbnail_id = get_post_thumbnail_id($post_id);
+
+    if ($thumbnail_id) {
+        // Met à jour la relation entre le média et l'article
+        wp_update_post(array(
+            'ID' => $thumbnail_id,
+            'post_parent' => $post_id,
+        ));
+    }
+});
+
+
+

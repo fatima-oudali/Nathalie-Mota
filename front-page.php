@@ -34,13 +34,13 @@ get_header();
         ?>
         
         <!--<h1>Bienvenue sur notre site</h1>-->
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/titre-header.png" alt="Titre photographe event">
+        <h1>PHOTOGRAPHE EVENT</h1>
     </section>
     <section class="related-photos">
         <div class="filters">
             <div>
                 <select id="filter-categorie">
-                    <option value="">Catégories</option>
+                    <option value=" ">Catégories</option>
                     <?php 
                     $categories = get_terms(array(
                         'taxonomy' => 'categorie',
@@ -52,8 +52,8 @@ get_header();
                     ?>
                 </select>
 
-                <select id="filter-format">
-                    <option value="">Formats</option>
+                <select id="filter-format" onfocus="this.size=1;" onblur="this.size=0;" onchange="this.size=1; this.blur()">
+                 <option value=" ">Formats</option> 
                     <?php 
                     $formats = get_terms(array(
                         'taxonomy' => 'format',

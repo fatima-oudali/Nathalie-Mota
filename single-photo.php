@@ -15,8 +15,6 @@ while ( have_posts() ) :
 ?>
 
     <!-- Partie 1 : Zone de contenu -->
-    <div class="full-height">
-
         <!-- Détails de l'article -->
         <section class="article-details">
             <div class="article-info">
@@ -109,7 +107,6 @@ while ( have_posts() ) :
 
             </div>
         </section>
-    </div>
     <!-- Partie 2 : Photos apparentées -->
     <section class="related-photos">
         <h3>Vous aimerez AUSSI</h3>

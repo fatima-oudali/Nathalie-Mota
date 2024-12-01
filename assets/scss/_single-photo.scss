@@ -3,6 +3,8 @@
    max-width: 1148px;   
 }
 .article-details {
+    max-width: 1148px;
+    margin: auto; 
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -37,6 +39,8 @@
     }
 }
 .interaction-section {
+    max-width: 1148px;
+    margin: auto; 
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -76,7 +80,7 @@
     .related-images {
        // @include flex-centered-space-between;
        display: flex;
-    /* justify-content: space-between; */
+     justify-content: center;
     margin-bottom: 100px;
     flex-wrap: wrap;
     gap: 20px;
@@ -104,13 +108,19 @@
 
 // Responsive pour les tablettes (max-width: 1024px)
 @include respond-to($breakpoint-tablet) {
-    .full-height {
+   /* .full-height {
+        max-width: 1024px;
+        width: 90% ;
+        height: auto;
+    }*/
+    .article-details {
         max-width: 1024px;
         width: 90% ;
         height: auto;
     }
-    .article-details {
-        height: auto;
+    .interaction-section {
+        max-width: 1024px;
+        width: 90% ;
     }
     .related-photos {
         max-width: 1024px;
@@ -121,9 +131,9 @@
 
 // Responsive pour les petits écrans (max-width: 768px)
 @include respond-to($breakpoint-mobile) {
-    .full-height{
+   /* .full-height{
         height: auto;
-    }
+    }*/
     .article-details {
         display: flex;
         flex-direction: column-reverse;

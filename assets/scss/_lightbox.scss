@@ -1,0 +1,105 @@
+/* Style de la lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Fond noir semi-transparent */
+  display: none; /* Cachée par défaut */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Activer la lightbox */
+.lightbox.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Contenu de la lightbox */
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90vh;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Bouton de fermeture */
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Conteneur pour les boutons et l'image */
+.lightbox-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Image et informations */
+.lightbox-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  text-align: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+/* Informations sur l'image */
+.lightbox-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.info-category,
+.info-reference {
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Boutons de navigation */
+.nav-btn {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.nav-btn:hover {
+  opacity: 1;
+}

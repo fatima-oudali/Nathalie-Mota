@@ -66,6 +66,12 @@ label {
 
 body {
   margin: 0;
+  height: 100vh;
+}
+
+.bloc-page {
+  margin: 0 50px;
+  height: 80%;
 }
 
 /* Style pour le header */
@@ -173,17 +179,18 @@ header .logo {
     visibility: hidden; /* Cache l'overlay */
   }
   .main-navigation.active {
-    padding: 0;
+    padding-left: 0;
+    padding-top: 200px;
     margin: 0;
     display: flex; /* Affiche le menu en colonne */
     align-items: center;
-    justify-content: center;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     background-color: #E00000;
     left: 0;
     opacity: 1;
     visibility: visible;
+    z-index: 20;
   }
   /* Afficher le bouton hamburger sur mobile */
   .menu-toggle {
@@ -227,6 +234,18 @@ footer {
   font-weight: 700;
 }
 
+@media (max-width: 1024px) {
+  /*  body {
+
+        position: relative;
+    }*/
+  /* footer {
+       position: absolute;
+       bottom: 0;
+       right: 0;
+       left:0;
+   }*/
+}
 @media (max-width: 768px) {
   footer {
     height: 208px;
@@ -246,22 +265,20 @@ footer {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0);
   z-index: 1000;
   display: none;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   overflow-y: auto;
   opacity: 0;
   transition: opacity 1s ease-in-out, background-color 1s ease-out, transform 1s ease-in;
 }
 .modal.show {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.9);
-  transform: scale(1.02);
-  align-items: center;
-  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.95);
+  transform: scale(1.01);
 }
 .modal.hide {
   opacity: 0;
@@ -272,11 +289,10 @@ footer {
 .modal .modal-content {
   background-color: #fff;
   max-width: 597px;
-  width: 95%;
-  max-height: 95vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: auto;
+  width: 100%;
+  max-height: 769px;
+  overflow: hidden;
+  height: 95vh;
   border: solid 5px #000;
   padding: 10px 0;
   display: flex;
@@ -290,7 +306,7 @@ footer {
 }
 .modal .modal-content form {
   width: 263px;
-  padding-top: 30px;
+  height: auto;
 }
 .modal .modal-content form p {
   margin-bottom: 0;
@@ -313,7 +329,7 @@ footer {
   margin-bottom: 10px;
 }
 .modal .modal-content form textarea {
-  height: 210px;
+  max-height: 210px;
   resize: none;
 }
 .modal .modal-content form input:focus,
@@ -335,6 +351,144 @@ footer {
   color: #FFFFFF;
   background-color: #000000;
 }
+.modal .modal-content form .wpcf7-response-output {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    align-items: start;
+    padding-top: 50px;
+  }
+  .modal .modal-content {
+    max-width: 286px;
+    max-height: 583px;
+  }
+  .modal .modal-content img {
+    height: 14%;
+  }
+  .modal .modal-content form {
+    width: 190px;
+  }
+  .modal .modal-content form p {
+    margin-top: 5%;
+  }
+  .modal .modal-content form input {
+    margin-bottom: 0;
+  }
+  .modal .modal-content form textarea {
+    max-height: 149px;
+  }
+  .modal .modal-content form #btn-envoyer {
+    width: 190px;
+  }
+}
+/* Style de la lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Fond noir semi-transparent */
+  display: none; /* Cachée par défaut */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Activer la lightbox */
+.lightbox.active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Contenu de la lightbox */
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90vh;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Bouton de fermeture */
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Conteneur pour les boutons et l'image */
+.lightbox-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Image et informations */
+.lightbox-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  text-align: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+/* Informations sur l'image */
+.lightbox-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.info-category,
+.info-reference {
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Boutons de navigation */
+.nav-btn {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.nav-btn:hover {
+  opacity: 1;
+}
 
 .full-height {
   margin: auto;
@@ -342,6 +496,8 @@ footer {
 }
 
 .article-details {
+  max-width: 1148px;
+  margin: auto;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -376,6 +532,8 @@ footer {
 }
 
 .interaction-section {
+  max-width: 1148px;
+  margin: auto;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -430,7 +588,7 @@ footer {
 }
 .related-photos .related-images {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: center;
   margin-bottom: 100px;
   flex-wrap: wrap;
   gap: 20px;
@@ -456,13 +614,19 @@ footer {
 }
 
 @media (max-width: 1024px) {
-  .full-height {
+  /* .full-height {
+       max-width: 1024px;
+       width: 90% ;
+       height: auto;
+   }*/
+  .article-details {
     max-width: 1024px;
     width: 90%;
     height: auto;
   }
-  .article-details {
-    height: auto;
+  .interaction-section {
+    max-width: 1024px;
+    width: 90%;
   }
   .related-photos {
     max-width: 1024px;
@@ -471,9 +635,9 @@ footer {
   }
 }
 @media (max-width: 768px) {
-  .full-height {
-    height: auto;
-  }
+  /* .full-height{
+       height: auto;
+   }*/
   .article-details {
     display: flex;
     flex-direction: column-reverse;
@@ -542,6 +706,7 @@ footer {
   justify-content: center;
   overflow: hidden;
   color: #fff;
+  z-index: -1;
 }
 
 .hero-background {
@@ -558,6 +723,12 @@ footer {
 
 .hero img {
   width: 1000px;
+}
+
+.hero h1 {
+  font-size: 96px;
+  color: transparent;
+  -webkit-text-stroke: 3px #FFFFFF;
 }
 
 .home-page .related-photos {
@@ -584,6 +755,22 @@ footer {
   background-color: #000000;
 }
 
+#photo-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.photo-item {
+  text-align: center;
+}
+
 .filters {
   width: 100%;
   margin-top: 80px;
@@ -601,7 +788,22 @@ footer {
   padding: 11px 18px;
 }
 
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 50px;
+  }
+}
 @media (max-width: 768px) {
+  .hero {
+    min-height: 253px;
+  }
+  .hero .hero-background {
+    height: 253px;
+  }
+  .hero h1 {
+    font-size: 27.59px;
+    -webkit-text-stroke: 0.86px #FFFFFF;
+  }
   .filters {
     display: flex;
     flex-direction: column;
@@ -614,5 +816,94 @@ footer {
   .filters #sort-date {
     margin-bottom: 10px;
     width: 270px;
+  }
+}
+/* Conteneur principal */
+.related-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease; /* Supprimé : transform pour éviter le scale */
+}
+
+.photo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Overlay au survol */
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fond noir semi-transparent */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none; /* Désactive les clics quand invisible */
+}
+
+.related-photo:hover .photo-overlay {
+  opacity: 1;
+  pointer-events: auto; /* Active les clics quand visible */
+}
+
+.related-photo:hover .photo-thumbnail {
+  opacity: 0.7; /* Image légèrement sombre */
+}
+
+/* Icône œil au centre */
+.icon-center {
+  margin: auto;
+  text-align: center;
+  width: 46px;
+  height: 31.2px;
+  cursor: pointer;
+}
+
+/* Icône plein écran en haut à droite */
+.icon-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+}
+
+/* Catégorie en bas à droite */
+.info-bottom-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: white;
+}
+
+/* Titre en bas à gauche */
+.info-bottom-left {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 14px;
+  color: white;
+}
+
+/* Responsive pour les tablettes (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .photo-overlay {
+    display: none;
+  }
+  .related-photo:hover .photo-thumbnail {
+    opacity: 1; /* Pas d'effet d'assombrissement */
   }
 }/*# sourceMappingURL=main.css.map */

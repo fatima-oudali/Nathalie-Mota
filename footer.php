@@ -10,6 +10,8 @@
     <!-- Inclure la modale de contact -->
     <?php get_template_part('template-parts/modal', 'contact'); ?>
 
+    <?php get_template_part('template-parts/lightbox'); ?>
+
     <?php wp_footer(); ?> <!-- Appel à wp_footer pour inclure les scripts et styles nécessaires -->
 
 </footer>

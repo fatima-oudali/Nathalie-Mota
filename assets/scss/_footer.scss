@@ -27,6 +27,23 @@ footer {
 
 }
 
+
+// Responsive pour les tablettes (max-width: 1024px)
+@include respond-to($breakpoint-tablet) {
+  /*  body {
+        
+        position: relative;
+    }*/
+   /* footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left:0;
+    }*/
+}
+
+
+
 // Responsive pour les petits écrans (max-width: 768px)
 @include respond-to($breakpoint-mobile) {
     footer {
