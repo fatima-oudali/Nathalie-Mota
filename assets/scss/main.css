@@ -71,9 +71,19 @@ body {
 
 .bloc-page {
   margin: 0 50px;
-  height: 80%;
+  min-height: 80%;
 }
 
+@media (max-width: 1024px) {
+  .bloc-page {
+    min-height: 88%;
+  }
+}
+@media (max-width: 768px) {
+  .bloc-page {
+    min-height: 90%;
+  }
+}
 /* Style pour le header */
 header {
   display: flex;

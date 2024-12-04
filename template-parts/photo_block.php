@@ -1,10 +1,9 @@
 <div class="related-photo">
     <?php 
     if ( has_post_thumbnail() ) {
-        //the_post_thumbnail('large', ['class' => 'photo-thumbnail']); 
         the_post_thumbnail('large', [
             'class' => 'photo-thumbnail', 
-            'onclick' => 'goToSinglePage(' . get_the_ID() . ', event)'
+            'onclick' => 'handleLightbox(' . esc_js(get_post_thumbnail_id(get_the_ID())) . ', event)'
         ]); 
     }
     ?>
@@ -15,11 +14,9 @@
         </div>
 
         <!-- Icône "plein écran" en haut à droite -->
-       
-
         <div class="icon-top-right" onclick="handleLightbox(<?php echo esc_js(get_post_thumbnail_id(get_the_ID())); ?>, event)">
     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_fullscreen.png" alt="Voir en plein écran" class="icon-fullscreen">
-    </div>
+</div>
 
 
         <!-- Informations supplémentaires -->

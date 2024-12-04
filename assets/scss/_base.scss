@@ -4,8 +4,23 @@ body {
 }
 .bloc-page {
     margin: 0 50px;
-    height: 80%;
+    min-height: 80%;
 }
+
+
+// Responsive pour les tablettes (max-width: 768px)
+@media (max-width: 1024px) {
+    .bloc-page {
+       min-height: 88%;
+    }
+ }
+
+// Responsive pour les petits écrans (max-width: 768px)
+@media (max-width: 768px) {
+    .bloc-page {
+       min-height: 90%;
+    }
+ }
 
 
 
