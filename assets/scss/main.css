@@ -64,10 +64,6 @@ label {
   font-style: normal;
 }
 
-/*body {
-    margin: 0;
-    height: 100vh;
-}*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -716,8 +712,8 @@ footer {
     justify-content: space-between;
   }
   .related-photos .related-images .related-photo {
-    max-width: 318px;
-    max-height: 279px;
+    width: 318px;
+    height: 279px;
     margin-bottom: 20px;
   }
 }
