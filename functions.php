@@ -65,6 +65,7 @@ function load_more_photos() {
 add_action('wp_ajax_load_more_photos', 'load_more_photos'); // Utilisateurs connectés
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos'); // Utilisateurs non connectés
 
+
 // Fonction pour filtrer et trier les photos selon les critères définis par l'utilisateur (catégorie, format, etc.)
 function filter_and_sort_photos() {
     // Récupère les valeurs de filtre envoyées par l'utilisateur (par exemple, catégorie, format, tri)

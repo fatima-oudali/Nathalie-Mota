@@ -3,7 +3,7 @@
     if ( has_post_thumbnail() ) {
         the_post_thumbnail('large', [
             'class' => 'photo-thumbnail', 
-            'onclick' => 'handleLightbox(' . esc_js(get_post_thumbnail_id(get_the_ID())) . ', event)'
+            'onclick' => 'goToSinglePage(' . get_the_ID() . ', event)'
         ]); 
     }
     ?>

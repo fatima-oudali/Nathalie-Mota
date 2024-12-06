@@ -28,7 +28,6 @@ header {
 
 
 .main-navigation li a:hover {
-    //color: #E00000;
     font-weight: 700;
 }
 
@@ -87,6 +86,9 @@ header {
     header {
         padding: 0 80px;
     }
+    .main-navigation li a {
+        font-size: 14px;
+    }
 }
 
 
@@ -103,28 +105,35 @@ header {
 .main-navigation {
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    width: 0;
     background-color: #fff;
     position: absolute;
     top: 80px;
+    left:0;
+    right:0;
+    bottom: 0;
     box-shadow: 0px 4px 14px 10px #00000008;
-    left: 100%; /* Positionne le menu en dehors de l'écran */
-    transition: left 300ms ease-out, opacity 300ms ease-out;
+    transform: translateX(100%);
+    // left: 100%; /* Positionne le menu en dehors de l'écran */
+    //transition: left 300ms ease-out, opacity 300ms ease-out;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+
     opacity: 0;
     visibility: hidden; /* Cache l'overlay */
 }
 
 .main-navigation.active {
+    transform: translateX(0); /* Ramène dans l'écran */
     //position: fixed;
     padding-left: 0;
     padding-top: 200px;
     margin: 0;
     display: flex; /* Affiche le menu en colonne */
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    //width: 100%;
+    //height: 100vh;
     background-color: #E00000;
-    left: 0;
+    //left: 0;
     opacity: 1;
     visibility: visible;
     z-index: 20;

@@ -60,15 +60,6 @@ jQuery(document).ready(function($) {
 document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector('.menu-toggle');
     const navigation = document.querySelector('.main-navigation');
-
-    if (menuToggle && navigation) {
-        menuToggle.addEventListener('click', function () {
-            console.log('Le bouton burger a été cliqué.');
-        });
-    } else {
-        console.error('Les sélecteurs .menu-toggle ou .main-navigation sont introuvables.');
-    }
-
     menuToggle.addEventListener('click', function() {
         setTimeout(() => {
             menuToggle.classList.toggle('open'); // Active l'animation de transformation du burger en croix
@@ -78,63 +69,64 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Code jQuery pour charger plus de photos avec un bouton
-jQuery(document).ready(function($) {
-    let page = 2; // Début à la page 2, car la page 1 est déjà chargée
+jQuery(document).ready(function($) { // Attend que le DOM soit chargé
+    let page = 2; // Commence à la page 2, car la page 1 est déjà affichée
 
-    $('#load-more-button').on('click', function() {
-        $.ajax({
-            url: wp_data.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'load_more_photos',
-                page: page,
+    $('#load-more-button').on('click', function() { // Ajoute un événement "click" au bouton
+        $.ajax({ // Lance une requête AJAX
+            url: wp_data.ajax_url, // URL où envoyer la requête (définie par WordPress)
+            type: 'POST', // Méthode POST pour envoyer des données
+            data: { 
+                action: 'load_more_photos', // Action WordPress à exécuter
+                page: page, // Numéro de la page à charger
             },
-            success: function(response) {
-                if(response) {
-                    $('.related-images').append(response); // Ajoute les nouvelles photos à la galerie
-                    page++; // Incrémente le numéro de la page pour charger les prochaines photos
-                } else {
-                    $('#load-more-button').hide(); // Cache le bouton si aucune photo n'est disponible
+            success: function(response) { // Si la requête réussit
+                if (response) { // Si le serveur renvoie des photos
+                    $('.related-images').append(response); // Ajoute les photos à la galerie
+                    page++; // Incrémente le numéro de page pour la prochaine requête
+                } else { 
+                    $('#load-more-button').hide(); // Cache le bouton si plus de photos
                 }
             },
-            error: function() {
-                console.log('Erreur de chargement des photos.');
+            error: function() { // Si la requête échoue
+                console.log('Erreur de chargement des photos.'); // Affiche un message d'erreur
             }
         });
     });
 });
 
+
 // Filtrer et trier les photos avec des sélections
 document.addEventListener("DOMContentLoaded", function () {
-    const filters = document.querySelectorAll("#filter-categorie, #filter-format, #sort-date");
-    const photoContainer = document.querySelector(".related-images");
+    const filters = document.querySelectorAll("#filter-categorie, #filter-format, #sort-date"); // Sélectionne les filtres
+    const photoContainer = document.querySelector(".related-images"); // Sélectionne le conteneur des photos
 
-    filters.forEach(filter => {
-        filter.addEventListener("change", function () {
-            const category = document.querySelector("#filter-categorie").value;
-            const format = document.querySelector("#filter-format").value;
-            const sort = document.querySelector("#sort-date").value;
+    filters.forEach(filter => { // Pour chaque filtre
+        filter.addEventListener("change", function () { // Quand un filtre change
+            const category = document.querySelector("#filter-categorie").value; // Récupère la catégorie
+            const format = document.querySelector("#filter-format").value; // Récupère le format
+            const sort = document.querySelector("#sort-date").value; // Récupère le tri par date
 
-            const formData = new FormData();
-            formData.append("action", "filter_and_sort_photos");
-            formData.append("category", category);
-            formData.append("format", format);
-            formData.append("sort", sort);
+            const formData = new FormData(); // Crée un objet FormData pour envoyer les données
+            formData.append("action", "filter_and_sort_photos"); // Ajoute l'action
+            formData.append("category", category); // Ajoute la catégorie
+            formData.append("format", format); // Ajoute le format
+            formData.append("sort", sort); // Ajoute le tri
 
-            fetch(wp_data.ajax_url, {
-                method: "POST",
-                body: formData,
+            fetch(wp_data.ajax_url, { // Envoie la requête AJAX
+                method: "POST", // Méthode POST
+                body: formData, // Corps de la requête
             })
-            .then(response => response.text()) // Traite la réponse du serveur sous forme de texte
+            .then(response => response.text()) // Récupère la réponse en texte
             .then(data => {
-                photoContainer.innerHTML = data; // Remplace le contenu des photos filtrées
+                photoContainer.innerHTML = data; // Remplace les photos avec la réponse
             })
-            .catch(error => console.error("Erreur:", error)); // Gère les erreurs
+            .catch(error => console.error("Erreur:", error)); // Affiche l'erreur si elle se produit
         });
     });
 });
 
-
+/////***************************************///LIGHTBOX///******************************************//////
 
 // Fonction pour ouvrir la lightbox avec les détails d'une image
 function handleLightbox(mediaId, event = null) {
@@ -164,7 +156,6 @@ function handleLightbox(mediaId, event = null) {
             return response.json(); // Si la réponse est correcte, on transforme le JSON en objet
         })
         .then(media => {
-            console.log('Média récupéré:', media.post);  // Affiche les données récupérées du média
             const postId = media.post;
             if (!postId) throw new Error('Aucun post associé à ce média.'); // Si aucun post n'est trouvé, on déclenche une erreur
 
@@ -226,7 +217,7 @@ function handleLightbox(mediaId, event = null) {
 
 // Fonction pour obtenir l'ID de l'image suivante
 function getNextMediaId(currentMediaId) {
-    return fetch(`${window.location.origin}/wp-json/wp/v2/media`)
+    return fetch(`${window.location.origin}/wp-json/wp/v2/media?per_page=100`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la récupération de la liste des médias');
@@ -234,6 +225,7 @@ function getNextMediaId(currentMediaId) {
             return response.json(); // On récupère tous les médias sous forme de JSON
         })
         .then(mediaList => {
+            console.log(mediaList);
             const index = mediaList.findIndex(media => media.id === currentMediaId); // On trouve l'index de l'image actuelle
             if (index === -1) return null; // Si l'image n'est pas trouvée, on retourne null
             const nextIndex = (index + 1) % mediaList.length; // On calcule l'index de l'image suivante (en boucle)
@@ -243,14 +235,16 @@ function getNextMediaId(currentMediaId) {
 
 // Fonction pour obtenir l'ID de l'image précédente
 function getPrevMediaId(currentMediaId) {
-    return fetch(`${window.location.origin}/wp-json/wp/v2/media`)
+    return fetch(`${window.location.origin}/wp-json/wp/v2/media?per_page=100`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la récupération de la liste des médias');
             }
-            return response.json(); // On récupère tous les médias sous forme de JSON
+            return response.json() // On récupère tous les médias sous forme de JSON
+            
         })
         .then(mediaList => {
+            console.log(mediaList);
             const index = mediaList.findIndex(media => media.id === currentMediaId); // On trouve l'index de l'image actuelle
             if (index === -1) return null; // Si l'image n'est pas trouvée, on retourne null
             const prevIndex = (index - 1 + mediaList.length) % mediaList.length; // On calcule l'index de l'image précédente (en boucle)

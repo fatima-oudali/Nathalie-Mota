@@ -30,6 +30,7 @@ $current_reference = get_field('reference', $current_photo->ID); // Récupérer 
 ?>
 
 <!-- Lightbox -->
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-content">
     <!-- Bouton de fermeture -->
@@ -39,39 +40,36 @@ $current_reference = get_field('reference', $current_photo->ID); // Récupérer 
 
     <!-- Contenu de la lightbox avec navigation et image -->
     <div class="lightbox-inner">
-     <!-- Bouton Précédent -->
-     <button id="prev-btn" class="nav-btn" 
-    data-media-id="<?php echo get_post_thumbnail_id($all_photos[$prev_index]->ID); ?>" 
-    onclick="handleLightbox(<?php echo get_post_thumbnail_id($all_photos[$prev_index]->ID); ?>, event, 'prev')">
-    &larr; Précédente
-</button>
+        <!-- Bouton Précédent -->
+        <button id="prev-btn" class="nav-btn" 
+            data-media-id="<?php echo get_post_thumbnail_id($all_photos[$prev_index]->ID); ?>" 
+            onclick="handleLightbox(<?php echo get_post_thumbnail_id($all_photos[$prev_index]->ID); ?>, event, 'prev')">
+            &larr; Précédente
+        </button>
 
-<!-- Image et informations -->
-<div class="lightbox-image-container">
-    <img id="lightbox-image" src="<?php echo get_the_post_thumbnail_url($current_photo->ID, 'large'); ?>" alt="Photo" class="lightbox-image">
-    <div class="lightbox-info">
-        <div id="lightbox-category" class="info-category">
-            Catégorie : <?php
-            if ($current_category) {
-                foreach ($current_category as $category) {
-                    echo esc_html($category->name) . ' ';
-                }
-            }
-            ?>
+        <!-- Image et informations -->
+        <div class="lightbox-image-container">
+            <img id="lightbox-image" src="<?php echo get_the_post_thumbnail_url($current_photo->ID, 'large'); ?>" alt="Photo" class="lightbox-image">
+            <div class="lightbox-info">
+                <div id="lightbox-category" class="info-category">
+                    Catégorie : <?php
+                    if ($current_category) {
+                        foreach ($current_category as $category) {
+                            echo esc_html($category->name) . ' ';
+                        }
+                    }
+                    ?>
+                </div>
+                <div id="lightbox-reference" class="info-reference">Référence : <?php echo esc_html($current_reference); ?></div>
+            </div>
         </div>
-        <div id="lightbox-reference" class="info-reference">Référence : <?php echo esc_html($current_reference); ?></div>
-    </div>
-</div>
 
-<!-- Bouton Suivant -->
-<button id="next-btn" class="nav-btn" 
-    data-media-id="<?php echo get_post_thumbnail_id($all_photos[$next_index]->ID); ?>" 
-    onclick="handleLightbox(<?php echo get_post_thumbnail_id($all_photos[$next_index]->ID); ?>, event, 'next')">
-    Suivante &rarr;
-</button>
-
+        <!-- Bouton Suivant -->
+        <button id="next-btn" class="nav-btn" 
+            data-media-id="<?php echo get_post_thumbnail_id($all_photos[$next_index]->ID); ?>" 
+            onclick="handleLightbox(<?php echo get_post_thumbnail_id($all_photos[$next_index]->ID); ?>, event, 'next')">
+            Suivante &rarr;
+        </button>
     </div>
   </div>
 </div>
-
-
