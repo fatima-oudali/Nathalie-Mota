@@ -28,20 +28,6 @@ footer {
 }
 
 
-// Responsive pour les tablettes (max-width: 1024px)
-@include respond-to($breakpoint-tablet) {
-  /*  body {
-        
-        position: relative;
-    }*/
-   /* footer {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left:0;
-    }*/
-}
-
 
 
 // Responsive pour les petits écrans (max-width: 768px)
@@ -57,5 +43,15 @@ footer {
         margin: 0;
         padding: 0;
         line-height: 23.7px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .footer-menu-class li {
+        padding: 0;
+        a {
+            font-size: 14px;
+        }
     }
 }

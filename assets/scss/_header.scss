@@ -100,45 +100,36 @@ header {
             width: 138px;
         }
     }
+    .main-navigation {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 200px;
+        gap: 10px;
+        width: 0;
+        bottom: 0;
+        right: 0;
+        background-color: #E00000;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        box-shadow: 0px 4px 14px 10px #00000008;
+        transform: translateX(100%);
+        transition: transform .3s ease-out, opacity .3s ease-out;
+        opacity: 0;
+        visibility: hidden;
+    }
 
-/* Affichage du menu mobile quand actif */
-.main-navigation {
-    flex-direction: column;
-    gap: 10px;
-    width: 0;
-    background-color: #fff;
-    position: absolute;
-    top: 80px;
-    left:0;
-    right:0;
-    bottom: 0;
-    box-shadow: 0px 4px 14px 10px #00000008;
-    transform: translateX(100%);
-    // left: 100%; /* Positionne le menu en dehors de l'écran */
-    //transition: left 300ms ease-out, opacity 300ms ease-out;
-    transition: transform 300ms ease-out, opacity 300ms ease-out;
+    .main-navigation.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        z-index: 20;
+        width: 100%;
+    }
 
-    opacity: 0;
-    visibility: hidden; /* Cache l'overlay */
-}
-
-.main-navigation.active {
-    transform: translateX(0); /* Ramène dans l'écran */
-    //position: fixed;
-    padding-left: 0;
-    padding-top: 200px;
-    margin: 0;
-    display: flex; /* Affiche le menu en colonne */
-    align-items: center;
-    //width: 100%;
-    //height: 100vh;
-    background-color: #E00000;
-    //left: 0;
-    opacity: 1;
-    visibility: visible;
-    z-index: 20;
-   
-}
 
     /* Afficher le bouton hamburger sur mobile */
     .menu-toggle {
@@ -155,5 +146,11 @@ header {
             color: #FFFFFF;
             font-size: 44px;
         }
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 0 10px 0 15px; 
     }
 }

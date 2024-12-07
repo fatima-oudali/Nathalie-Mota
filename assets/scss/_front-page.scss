@@ -116,3 +116,23 @@
     }  
 
 }
+
+@media (max-width: 320px) {
+    .hero h1 {
+        font-size: 20px;
+    }
+    .filters {
+        max-width: 230px;
+        width: 100%;
+        #filter-categorie,
+        #filter-format,
+        #sort-date {
+            width: 250px;
+            width: 100%;
+        }
+    }
+    #load-more-button {
+        max-width: 250px;
+        width: 100%;
+    }
+}
